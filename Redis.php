@@ -66,7 +66,9 @@
 		 */
 		public function __construct( $obj, $cache_config ) {
 			$this->obj = $obj;
-			if( $obj instanceof Cacheable ) {
+			// Safer to check attr than instanceof Cachable since it is possible
+			// That there will be separate inclusions of EggCup for different libraries
+			if( $obj->_cup ) {
 				$this->obj->_cup = $this;
 			}
 			$this->refl = new \ReflectionClass( $obj );
