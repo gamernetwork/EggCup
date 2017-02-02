@@ -36,7 +36,8 @@ class MyExistingClass extends \Eggcup\Cacheable {
     }
 }
 
-$cachedclass = new \Eggcup\Redis( new MyExistingClass(), array( array( "host" => "192.168.4.142", "port" => "11216" ) ) );
+$cachedclass = new \Eggcup\Redis( new MyExistingClass(),
+    array( array( "host" => "192.168.4.142", "port" => "11216" ) ) );
 
 // this return value will be cached for 60s
 // first call will use DB
