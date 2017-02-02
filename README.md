@@ -1,3 +1,5 @@
+Gamer Network is hiring! http://jobs.gamesindustry.biz/gamer-network/
+
 # EggCup
 
 Caching 'decorators' for PHP classes.
@@ -19,7 +21,7 @@ Memcached (with 'd') is recommended.
 Redis mode (`Redis.inc.php`) supports both Predis (native PHP
 version) and phpredis (C module), the latter being about 3 times faster.
 
-Example:
+### Examples
 
 ```php
 class MyExistingClass extends \Eggcup\Cacheable {
@@ -54,7 +56,7 @@ $cachedclass->getSomeDataFromDB( 1, 2 );
 
 Cache-invalidation is also possible by tagging methods::
 
-```
+```php
 /**
 * cache-me
 * cache-expiry: 60
@@ -70,7 +72,7 @@ Typically tags relate to SQL table names.
 
 Then simply tag methods that write data and they will invalidate all keys with these tags::
 
-```
+```php
 /**
 * cache-flush: tag1
 */
@@ -92,7 +94,7 @@ methods tagged with either tag1, tag2 or both.
 
 You can force all reads to miss by setting:
 
-```
+```php
 define('CACHE_BYPASS');
 ```
 
