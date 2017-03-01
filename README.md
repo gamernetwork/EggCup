@@ -96,7 +96,7 @@ methods tagged with either tag1, tag2 or both.
 You can force all reads to miss by setting:
 
 ```php
-define('CACHE_BYPASS');
+define('CACHE_ALWAYS_MISS');
 ```
 
 Results of calls to database backend will still be written to cache.
