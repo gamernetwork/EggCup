@@ -259,7 +259,7 @@
 					$ret = $this->red->get( $key );
 					self::debug( "    - got " . var_export($ret, true) );
 					if(
-						defined( "CACHE_BYPASS" ) // bypass read but still write
+						defined( "CACHE_ALWAYS_MISS" ) // bypass read but still write
 						|| ( 'predis' == $this->backend && NULL === $ret || 'phpredis' == $this->backend && false === $ret )
 					) {
 						self::debug( "  --- Cache miss for $key" );
