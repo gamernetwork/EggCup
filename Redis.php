@@ -68,7 +68,7 @@
 			$this->obj = $obj;
 			// Safer to check attr than instanceof Cachable since it is possible
 			// That there will be separate inclusions of EggCup for different libraries
-			if( $obj->_cup ) {
+			if( isset($obj->_cup) ) {
 				$this->obj->_cup = $this;
 			}
 			$this->refl = new \ReflectionClass( $obj );
@@ -253,12 +253,15 @@
 					return call_user_func_array( array( $this->obj, $name), $args );
 				}
 
-				if( $cache_args[ "cacheme" ] && ! defined( "CACHE_BYPASS" ) ) {
+				if( $cache_args[ "cacheme" ] ) {
 					$key = $this->cache_prefix . $name . "(" . md5( serialize( $args ) ) . ")";
 					self::debug( "  Method $name has signature $key" );
 					$ret = $this->red->get( $key );
 					self::debug( "    - got " . var_export($ret, true) );
-					if( 'predis' == $this->backend && NULL === $ret || 'phpredis' == $this->backend && false === $ret ) {
+					if(
+						defined( "CACHE_ALWAYS_MISS" ) // bypass read but still write
+						|| ( 'predis' == $this->backend && NULL === $ret || 'phpredis' == $this->backend && false === $ret )
+					) {
 						self::debug( "  --- Cache miss for $key" );
 						$ret = call_user_func_array( array( $this->obj, $name), $args );
 						$this->red->setex( $key, $cache_args[ "expiry" ], serialize( $ret ) );
