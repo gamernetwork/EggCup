@@ -101,6 +101,12 @@ define('CACHE_ALWAYS_MISS');
 
 Results of calls to database backend will still be written to cache.
 
+You can get some verbose tracing by setting:
+
+```php
+define('CACHE_DEBUG');
+```
+
 ## Limitations
 
 Intraobject method calls, such as `$this->fetchMethod()` will not by default be cached and to do so requires a very small refactor to `$this->_cup->fetchMethod()`.
